@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30503.244
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathOperation", "MathOperation\MathOperation.csproj", "{C7624092-2327-49AD-A559-93B02F893C8E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Animals", "Animals\Animals.csproj", "{A6B6D788-9120-4642-BEA9-E19CEBD0E5C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shapes", "Shapes\Shapes.csproj", "{688FCADE-2B53-4499-AA64-1C36E7D92E6D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C7624092-2327-49AD-A559-93B02F893C8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7624092-2327-49AD-A559-93B02F893C8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7624092-2327-49AD-A559-93B02F893C8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7624092-2327-49AD-A559-93B02F893C8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6B6D788-9120-4642-BEA9-E19CEBD0E5C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6B6D788-9120-4642-BEA9-E19CEBD0E5C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6B6D788-9120-4642-BEA9-E19CEBD0E5C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6B6D788-9120-4642-BEA9-E19CEBD0E5C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{688FCADE-2B53-4499-AA64-1C36E7D92E6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{688FCADE-2B53-4499-AA64-1C36E7D92E6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{688FCADE-2B53-4499-AA64-1C36E7D92E6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{688FCADE-2B53-4499-AA64-1C36E7D92E6D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BB7B9FDE-4D7D-4E58-B02F-35924C1122A2}
+	EndGlobalSection
+EndGlobal
