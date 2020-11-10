@@ -27,8 +27,8 @@ namespace PizzaCalories
         public Dough(string flourType, string bakingTechnique, double weight)
         {
             this.FlourType = flourType;
-            this.Weight = weight;
             this.BakingTechnique = bakingTechnique;
+            this.Weight = weight;
         }
 
         public string FlourType
@@ -56,7 +56,7 @@ namespace PizzaCalories
             {
                 if (!this.DefaultBakingTechniques.ContainsKey(value.ToLower()))
                 {
-                    throw new ArgumentException("Invalid baking technique.");
+                    throw new ArgumentException("Invalid type of dough.");
                 }
                 this.bakingTechnique = value.ToLower();
             }
@@ -69,7 +69,7 @@ namespace PizzaCalories
             }
             private set
             {
-                if (value<1||value>200)
+                if (value < 1 || value > 200)
                 {
                     throw new ArgumentException("Dough weight should be in the range [1..200].");
                 }
@@ -81,7 +81,11 @@ namespace PizzaCalories
             * this.DefaultBakingTechniques[this.BakingTechnique]
             * calories
             * this.Weight;
-            
+
+
+    }
+}
+
 
     }
 }
