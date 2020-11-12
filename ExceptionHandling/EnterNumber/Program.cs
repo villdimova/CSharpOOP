@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace EnterNumber
 {
@@ -18,21 +18,37 @@ namespace EnterNumber
                 {
                     Console.WriteLine("Enter number:");
 
-                    NumReader numReader = new NumReader();
-                    while (!numReader.ReadNumber(start,end))
+                    if (!ReadNumber(start,end))
                     {
-                        Console.WriteLine("Enter valid number!!!");
-                        numReader.ReadNumber(start, end);
+                        Console.WriteLine("You have entered wrong number!");
+                        i = -1;
+
                     }
 
-                    
-                }
+                 }
             }
             catch (FormatException)
             {
 
                 Console.WriteLine("Invalid Number!"); ;
             }
+
+
+            static bool ReadNumber(int start, int end)
+
+            {
+                    int n = int.Parse(Console.ReadLine());
+                    if (n < start || n > end)
+                    {
+                        return false;
+                        
+
+                    }
+                
+
+                return true;
+            }
+
         }
     }
 }
