@@ -6,18 +6,17 @@ namespace SquareRoot
     {
         static void Main(string[] args)
         {
-            char n = char.Parse(Console.ReadLine());
-
             try
             {
+                int n = int.Parse(Console.ReadLine());
                 Number num = new Number(n);
                 Console.WriteLine(num.GetSquareRoot()); 
 
             }
-            catch (Exception ex)
+            catch (FormatException fe)
             {
 
-                Console.WriteLine("Invalid number!"); ;
+                Console.WriteLine(fe.Message);
             }
           
 
