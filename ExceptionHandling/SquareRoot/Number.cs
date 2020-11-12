@@ -5,14 +5,14 @@ namespace SquareRoot
 {
     public class Number
     {
-        private char numValue;
+        private int numValue;
 
-        public Number(char numValue)
+        public Number(int numValue)
         {
             this.NumValue = numValue;
         }
 
-        public char NumValue
+        public int NumValue
         {
             get
             {
@@ -20,12 +20,8 @@ namespace SquareRoot
             }
             private set
             {
-                if (char.IsLetter(value)||value <= 0)
-                {
-                    throw new ArgumentException("Invalid number!!!");
-                }
-
-                this.numValue = value;
+            
+            this.numValue = value;
             }
         }
 
