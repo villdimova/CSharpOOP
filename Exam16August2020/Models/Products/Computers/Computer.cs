@@ -1,4 +1,4 @@
-﻿using OnlineShop.Models.Products.Components;
+using OnlineShop.Models.Products.Components;
 using OnlineShop.Models.Products.Peripherals;
 using System;
 using System.Collections.Generic;
@@ -94,33 +94,33 @@ namespace OnlineShop.Models.Products.Computers
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-
-            sb.AppendLine($"Overall Performance: {this.OverallPerformance:f2}. Price: {this.Price:f2} - {this.GetType().Name}: {this.Manufacturer} {this.Model} (Id: {this.Id})");
             sb.AppendLine($" Components ({this.Components.Count}):");
-            if (this.Components.Count>0)
+            foreach (var item in this.Components)
             {
-                foreach (var component in components)
-                {
-                    sb.AppendLine($"  {component.ToString()}");
-                }
+                sb.AppendLine($"  {item.ToString()}");
             }
-           
-            
-            if (this.Peripherals.Count>0)
-            {
-                sb.AppendLine($" Peripherals ({this.Peripherals.Count}); Average Overall Performance ({this.peripherals.Average(p => p.OverallPerformance)}):");
-                foreach (var peripheral in peripherals)
-                {
-                    sb.AppendLine($"  {peripheral.ToString()}");
-                }
 
+            double overrallP = this.peripherals.Any() ? this.Peripherals.Average(p => p.OverallPerformance) : 0;
+
+            sb.AppendLine($" Peripherals ({this.Peripherals.Count}); Average Overall Performance ({overrallP:F2}):");
+            foreach (var item in this.Peripherals)
+            {
+                sb.AppendLine($"  {item.ToString()}");
+            }
+            return base.ToString() + Environment.NewLine + sb.ToString().TrimEnd();
+        }
+
+        private double CalculateOverallPerformance()
+        {
+
+            if (this.Components.Count == 0)
+            {
+                return base.OverallPerformance;
             }
             else
             {
-                sb.AppendLine($" Peripherals (0); Average Overall Performance (0):");
+                return base.OverallPerformance + this.Components.Average(c => c.OverallPerformance);
             }
-
-            return sb.ToString().TrimEnd();
         }
     }
 }
