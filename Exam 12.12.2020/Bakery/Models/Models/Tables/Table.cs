@@ -1,4 +1,4 @@
-﻿using Bakery.Models.BakedFoods.Contracts;
+using Bakery.Models.BakedFoods.Contracts;
 using Bakery.Models.Drinks.Contracts;
 using Bakery.Models.Tables.Contracts;
 using Bakery.Utilities.Messages;
@@ -18,23 +18,25 @@ namespace Bakery.Models.Tables
         private int numberOfPeople;
         private decimal pricePerPerson;
         private bool isReserved;
-        private decimal price;
 
-        public Table(int tableNumber, int capacity, decimal pricePerPerson)
+        protected Table(int tableNumber, int capacity, decimal pricePerPerson)
         {
-            this.foodOrders = new List<IBakedFood>();       
+            this.foodOrders = new List<IBakedFood>();
             this.drinkOrders = new List<IDrink>();
             this.TableNumber = tableNumber;
             this.Capacity = capacity;
             this.PricePerPerson = pricePerPerson;
-            this.IsReserved = false;
+
         }
 
-       
-
+        public IReadOnlyList<IBakedFood> FoodOrders => this.foodOrders;
+        public IReadOnlyList<IDrink> DrinkOrders => this.drinkOrders;
         public int TableNumber
         {
-            get { return this.tableNumber; }
+            get
+            {
+                return this.tableNumber;
+            }
             private set
             {
                 this.tableNumber = value;
@@ -42,10 +44,13 @@ namespace Bakery.Models.Tables
         }
         public int Capacity
         {
-            get { return this.capacity; }
+            get
+            {
+                return this.capacity;
+            }
             private set
             {
-                if (value<0)
+                if (value < 0)
                 {
                     throw new ArgumentException(ExceptionMessages.InvalidTableCapacity);
                 }
@@ -55,9 +60,10 @@ namespace Bakery.Models.Tables
         public int NumberOfPeople
         {
             get { return this.numberOfPeople; }
+
             private set
             {
-                if (value <0)
+                if (value <= 0)
                 {
                     throw new ArgumentException(ExceptionMessages.InvalidNumberOfPeople);
                 }
@@ -66,76 +72,73 @@ namespace Bakery.Models.Tables
         }
         public decimal PricePerPerson
         {
-            get { return pricePerPerson; }
+            get
+            {
+                return this.pricePerPerson;
+            }
             private set
             {
-                pricePerPerson = value;
+                this.pricePerPerson = value;
             }
         }
         public bool IsReserved
         {
-            get { return isReserved; }
+            get 
+            { 
+                return this.isReserved;
+            }
             private set
             {
-                if (this.NumberOfPeople>0)
-                {
-                    isReserved= true;
-                }
-                else
-                {
-                    isReserved = false;
-                }
+                this.isReserved = value;
             }
         }
-        public decimal Price => this.PricePerPerson * this.NumberOfPeople;
-        
+        public decimal Price => this.PricePerPerson * NumberOfPeople;
 
         public void Clear()
         {
-            this.foodOrders.Clear();
-            this.drinkOrders.Clear();
-            this.IsReserved = false;
-            this.NumberOfPeople = 0;
-            
+            foodOrders.Clear();
+            drinkOrders.Clear();
+            Capacity += NumberOfPeople;
+            IsReserved = false;
+           // NumberOfPeople = 0;
+
         }
         public decimal GetBill()
         {
-            decimal billTotal=this.foodOrders.Sum(f => f.Price) + this.drinkOrders.Sum(d => d.Price)+this.Price;
-            return billTotal;
+            decimal totalBill = this.DrinkOrders.Sum(d => d.Price) + this.FoodOrders.Sum(f => f.Price)+this.Price;
+            return totalBill;
         }
         public string GetFreeTableInfo()
         {
             StringBuilder sb = new StringBuilder();
-            
-                sb.AppendLine($"Table: {this.TableNumber}");
-                sb.AppendLine($"Type: {this.GetType().Name}");
-                sb.AppendLine($"Capacity: {this.Capacity}");
-                sb.AppendLine($"Price per Person: {this.PricePerPerson}");
+
+            sb.AppendLine($"Table: {this.TableNumber}");
+            sb.AppendLine($"Type: {this.GetType().Name}");
+            sb.AppendLine($"Capacity: {this.Capacity}");
+            sb.AppendLine($"Price per Person: {this.PricePerPerson}");
 
             return sb.ToString().TrimEnd();
-
         }
         public void OrderDrink(IDrink drink)
         {
-           
+            if (IsReserved == true)
+            {
                 this.drinkOrders.Add(drink);
-          
-         
+            }
         }
         public void OrderFood(IBakedFood food)
         {
-            
+            if (IsReserved == true)
+            {
                 this.foodOrders.Add(food);
-            
+            }
         }
         public void Reserve(int numberOfPeople)
         {
-            if (numberOfPeople<=0)
-            {
-                throw new ArgumentException(ExceptionMessages.InvalidNumberOfPeople);
-            }
+            
             this.IsReserved = true;
             this.NumberOfPeople = numberOfPeople;
+            this.Capacity -= NumberOfPeople;
         }
     }
 }
