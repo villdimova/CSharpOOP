@@ -1,4 +1,4 @@
-﻿using Bakery.Core.Contracts;
+using Bakery.Core.Contracts;
 using Bakery.Models.BakedFoods;
 using Bakery.Models.BakedFoods.Contracts;
 using Bakery.Models.Drinks;
@@ -41,12 +41,7 @@ namespace Bakery.Core
                 drink = new Water(name, portion, brand);
             }
 
-            if(drink!=null)
-            {
-                this.drinks.Add(drink);
-                
-            }
-
+            this.drinks.Add(drink);
             string message = String.Format(OutputMessages.DrinkAdded, name, brand);
             return message;
         }
@@ -63,12 +58,7 @@ namespace Bakery.Core
                 food = new Cake(name, price);
             }
 
-            if (food!=null)
-            {
-                this.bakedFoods.Add(food);
-
-            }
-            
+            this.bakedFoods.Add(food);
             string message = String.Format(OutputMessages.FoodAdded, name, food.GetType().Name);
             return message;
         }
@@ -83,15 +73,9 @@ namespace Bakery.Core
             else if (type == nameof(OutsideTable))
             {
                 table = new OutsideTable(tableNumber, capacity);
-                
             }
 
-            if (table!=null)
-            {
-                this.tables.Add(table);
-                
-            }
-           
+            this.tables.Add(table);
             string message = String.Format(OutputMessages.TableAdded,tableNumber);
             return message;
         }
@@ -149,7 +133,6 @@ namespace Bakery.Core
             else
             {
                 table.OrderDrink(drink);
-                this.drinks.Remove(drink);
                 message = $"Table {tableNumber} ordered {drinkName} {drinkBrand}";
             }
 
@@ -175,7 +158,6 @@ namespace Bakery.Core
             else
             {
                 table.OrderFood(food);
-               
                 message = $"Table {tableNumber} ordered {foodName}";
             }
 
@@ -185,8 +167,6 @@ namespace Bakery.Core
         public string ReserveTable(int numberOfPeople)
         {
             ITable table = this.tables.FirstOrDefault(t => t.IsReserved == false && t.Capacity >= numberOfPeople);
-
-           
 
             string message = null;
             if (table==null)
